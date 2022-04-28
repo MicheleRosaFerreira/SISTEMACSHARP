@@ -334,6 +334,7 @@
             this.btdeletar.TabIndex = 26;
             this.btdeletar.Text = "Deletar";
             this.btdeletar.UseVisualStyleBackColor = false;
+            this.btdeletar.Click += new System.EventHandler(this.btdeletar_Click);
             // 
             // textEndereco
             // 

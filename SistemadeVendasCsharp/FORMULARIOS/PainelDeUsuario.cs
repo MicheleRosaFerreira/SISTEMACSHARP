@@ -18,8 +18,8 @@ namespace SistemadeVendasCsharp.FORMULARIOS
         {
             InitializeComponent();
         }
-  
 
+        
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -69,6 +69,10 @@ namespace SistemadeVendasCsharp.FORMULARIOS
                 MessageBox.Show("erro ao cadastrar usuario.");
             }
 
+
+            DataTable dt = cadastrar.Select();
+            dvgUsuario.DataSource = dt;
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -78,13 +82,37 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void btatualizar_Click(object sender, EventArgs e)
         {
-          
 
-        }
+            ConexaoBancoDados atualizar = new ConexaoBancoDados();
+            DadosCliente dadoscliente = new DadosCliente();
+            dadoscliente.nome = textNome.Text;
+            dadoscliente.sobrenome = textSobrenome.Text;
+            dadoscliente.email = textEmail.Text;
+            dadoscliente.usuario = textUsuario.Text;
+            dadoscliente.senha = textSenha.Text;
+            dadoscliente.contato = textContato.Text;
+            dadoscliente.endereco = textEndereco.Text;
+            dadoscliente.sexo = comboSexo.Text;
+            dadoscliente.usuario_tipo = comboTipoUsuario.Text;
+            dadoscliente.add_data = DateTime.Now;
+            dadoscliente.add_porquem = 1;
+            dadoscliente.id = 0;
 
-        private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
+            bool isSucesso = atualizar.Update(dadoscliente);
+            if (isSucesso == true)
+            {
+                MessageBox.Show("usuario atualizado com sucesso.");
+            }
+            else
+            {
+                MessageBox.Show("nao foi possivel atualizar usuario.");
+            }
+
+    }
+
+    private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
         {
-
+          
         }
 
         private void dvgUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -94,8 +122,24 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void PainelDeUsuario_Load(object sender, EventArgs e)
         {
-           
-       
+
+        }
+
+        private void btdeletar_Click(object sender, EventArgs e)
+        {
+            ConexaoBancoDados deletar = new ConexaoBancoDados();
+            DadosCliente dadoscliente = new DadosCliente();
+            dadoscliente.id = 0;
+
+            bool isSucesso = deletar.Update(dadoscliente);
+            if (isSucesso == true)
+            {
+                MessageBox.Show("usuario deletado com sucesso.");
+            }
+            else
+            {
+                MessageBox.Show("nao foi possivel deletar usuario.");
+            }
         }
     }
 }

@@ -98,6 +98,91 @@ namespace SistemadeVendasCsharp.DAL
             }
             return isSucesso;
         } 
+    
+    #endregion
+    #region atualizando dados no banco de dados.
+        public bool Update(DadosCliente u)
+        {
+            bool isSucesso = false;
+            SqlConnection con = new SqlConnection(myconstring);
+
+            try
+            { string sql = "update tabela_usuarios (nome, sobrenome, email, usuario, senha, contato, endereco, sexo, usuario_tipo, add_data, add_porquem,id) " +
+                    "set (@nome, @sobrenome,@email, @usuario, @senha , @contato, @endereco, @sexo, @usuario_tipo, @add_data, @add_porquem,@id)";
+                SqlCommand cmd = new SqlCommand(sql,con);
+
+                cmd.Parameters.AddWithValue("@nome",u.nome);
+                cmd.Parameters.AddWithValue("@sobrenome", u.sobrenome);
+                cmd.Parameters.AddWithValue("@email", u.email);
+                cmd.Parameters.AddWithValue("@usuario",u.usuario);
+                cmd.Parameters.AddWithValue("@senha",u.senha);
+                cmd.Parameters.AddWithValue("@contato",u.contato);
+                cmd.Parameters.AddWithValue("@endereco",u.endereco);
+                cmd.Parameters.AddWithValue("@sexo",u.sexo);
+                cmd.Parameters.AddWithValue("@usuario_tipo",u.usuario_tipo);
+                cmd.Parameters.AddWithValue("@add_data",u.add_data);
+                cmd.Parameters.AddWithValue("@add_porquem", u.add_porquem);
+                cmd.Parameters.AddWithValue("@id",u.id);
+
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+                
+                if (rows > 0 )
+                {
+                    isSucesso = true;
+                }
+                else
+                {
+                    isSucesso=false;
+                }
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show(ex.Message);    
+            }
+            finally
+            {
+                con.Close();
+
+            }
+            return isSucesso;
+        }
+        #endregion
+        #region
+        public bool Delete(DadosCliente u)
+        {
+            bool isSucesso = false;
+            SqlConnection con = new SqlConnection(myconstring);
+
+            try
+            {
+                string sql = "Delete from tabela_usuarios where id=@id";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                cmd.Parameters.AddWithValue("@id",u.id);
+                con.Open();
+                int rows = cmd.ExecuteNonQuery();
+
+                if (rows > 0)
+                {
+                    isSucesso = true;
+                }
+                else
+                {
+                    isSucesso = false;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+
+            }
+            return isSucesso;
+        }
     }
     #endregion
 }
