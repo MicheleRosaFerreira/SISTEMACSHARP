@@ -52,17 +52,17 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             dadoscliente.nome = textNome.Text;
             dadoscliente.sobrenome = textSobrenome.Text;
             dadoscliente.email = textEmail.Text;
-            dadoscliente.usuario = textUsuario.Text;    
+            dadoscliente.usuario = textUsuario.Text;
             dadoscliente.senha = textSenha.Text;
-            dadoscliente.contato = textContato.Text;    
+            dadoscliente.contato = textContato.Text;
             dadoscliente.endereco = textEndereco.Text;
             dadoscliente.sexo = comboSexo.Text;
-            dadoscliente.usuario_tipo= comboTipoUsuario.Text;  
+            dadoscliente.usuario_tipo = comboTipoUsuario.Text;
             dadoscliente.add_data = DateTime.Now;
             dadoscliente.add_porquem = 1;
 
             bool isSucesso = cadastrar.Insert(dadoscliente);
-            if(isSucesso == true)
+            if (isSucesso == true)
             {
                 MessageBox.Show("usuario cadastrado com sucesso.");
             }
@@ -75,7 +75,8 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             DataTable dt = cadastrar.Select();
             dvgUsuario.DataSource = dt;
 
-        }
+            Limpar();
+         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -98,7 +99,7 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             dadoscliente.usuario_tipo = comboTipoUsuario.Text;
             dadoscliente.add_data = DateTime.Now;
             dadoscliente.add_porquem = 1;
-            dadoscliente.id = 0;
+
 
             bool isSucesso = atualizar.Update(dadoscliente);
             if (isSucesso == true)
@@ -110,11 +111,11 @@ namespace SistemadeVendasCsharp.FORMULARIOS
                 MessageBox.Show("nao foi possivel atualizar usuario.");
             }
 
-    }
+        }
 
-    private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
+        private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
         {
-          
+
         }
 
         private void dvgUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -143,6 +144,21 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             {
                 MessageBox.Show("nao foi possivel deletar usuario.");
             }
+        }
+
+        private void Limpar()
+        {
+            textID.Text = "";
+            textNome.Text = "";
+            textSobrenome.Text = "";
+            textEmail.Text = "";
+            textUsuario.Text = "";
+            textSenha.Text = "";
+            textContato.Text = "";
+            textEndereco.Text = "";
+            comboSexo.Text = "";
+            comboTipoUsuario.Text = "";
+
         }
     }
 }
