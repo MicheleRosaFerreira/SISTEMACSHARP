@@ -19,7 +19,9 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             InitializeComponent();
         }
 
-        
+        ConexaoBancoDados dal = new ConexaoBancoDados();
+        DadosCliente dadoscliente = new DadosCliente();
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -122,7 +124,8 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void PainelDeUsuario_Load(object sender, EventArgs e)
         {
-
+            DataTable dt = dal.Select();
+            dvgUsuario.DataSource = dt;
         }
 
         private void btdeletar_Click(object sender, EventArgs e)

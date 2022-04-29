@@ -107,8 +107,10 @@ namespace SistemadeVendasCsharp.DAL
             SqlConnection con = new SqlConnection(myconstring);
 
             try
-            { string sql = "update tabela_usuarios (nome, sobrenome, email, usuario, senha, contato, endereco, sexo, usuario_tipo, add_data, add_porquem,id) " +
-                    "set (@nome, @sobrenome,@email, @usuario, @senha , @contato, @endereco, @sexo, @usuario_tipo, @add_data, @add_porquem,@id)";
+            {
+                string sql = "update tabela_usuarios nome=@nome, sobrenome=@sobrenome, email=@email, usuario=@usuario, senha=@senha, contato=@contato," +
+                    " endereco=@endereco, sexo=@sexo, usuario_tipo=@usuario_tipo, add_data=@add_data, add_porquem=@add_porquem,id=@id ";
+                    
                 SqlCommand cmd = new SqlCommand(sql,con);
 
                 cmd.Parameters.AddWithValue("@nome",u.nome);
