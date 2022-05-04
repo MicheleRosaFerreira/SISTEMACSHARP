@@ -292,11 +292,12 @@
             // 
             this.dvgUsuario.BackgroundColor = System.Drawing.Color.SeaShell;
             this.dvgUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgUsuario.Location = new System.Drawing.Point(408, 92);
+            this.dvgUsuario.Location = new System.Drawing.Point(408, 96);
             this.dvgUsuario.Name = "dvgUsuario";
             this.dvgUsuario.Size = new System.Drawing.Size(380, 225);
             this.dvgUsuario.TabIndex = 23;
             this.dvgUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgUsuario_CellContentClick);
+            this.dvgUsuario.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dvgUsuario_RowHeaderMouseClick);
             // 
             // btcadastrar
             // 

@@ -85,10 +85,12 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void btatualizar_Click(object sender, EventArgs e)
         {
-
-            ConexaoBancoDados atualizar = new ConexaoBancoDados();
+            ConexaoBancoDados atualizar = new ConexaoBancoDados();  
             DadosCliente dadoscliente = new DadosCliente();
-            dadoscliente.nome = textNome.Text;
+
+            dadoscliente.id = Convert.ToInt32(textID.Text);
+
+            dadoscliente.nome = textNome.Text  ;
             dadoscliente.sobrenome = textSobrenome.Text;
             dadoscliente.email = textEmail.Text;
             dadoscliente.usuario = textUsuario.Text;
@@ -99,18 +101,25 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             dadoscliente.usuario_tipo = comboTipoUsuario.Text;
             dadoscliente.add_data = DateTime.Now;
             dadoscliente.add_porquem = 1;
-
+        
 
             bool isSucesso = atualizar.Update(dadoscliente);
             if (isSucesso == true)
             {
-                MessageBox.Show("usuario atualizado com sucesso.");
+                MessageBox.Show("cadastro atualizado  com sucesso.");
+                Limpar();
             }
             else
             {
-                MessageBox.Show("nao foi possivel atualizar usuario.");
+                MessageBox.Show("erro ao atualizar cadastro.");
+             
             }
 
+
+            DataTable dt = atualizar.Select();
+            dvgUsuario.DataSource = dt;
+
+          
         }
 
         private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
@@ -131,21 +140,9 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void btdeletar_Click(object sender, EventArgs e)
         {
-            ConexaoBancoDados deletar = new ConexaoBancoDados();
-            DadosCliente dadoscliente = new DadosCliente();
-            dadoscliente.id = 0;
-
-            bool isSucesso = deletar.Update(dadoscliente);
-            if (isSucesso == true)
-            {
-                MessageBox.Show("usuario deletado com sucesso.");
-            }
-            else
-            {
-                MessageBox.Show("nao foi possivel deletar usuario.");
-            }
+       
         }
-
+        //Toda vez que o cadastro for realizado com sucesso as caixinhas de texto serao limpas para digitar outro usuario.
         private void Limpar()
         {
             textID.Text = "";
@@ -159,6 +156,21 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             comboSexo.Text = "";
             comboTipoUsuario.Text = "";
 
+        }
+
+        private void dvgUsuario_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            textID.Text = dvgUsuario.Rows[rowIndex].Cells[0].Value.ToString();
+            textNome.Text = dvgUsuario.Rows[rowIndex].Cells[1].Value.ToString();
+            textSobrenome.Text = dvgUsuario.Rows[rowIndex].Cells[2].Value.ToString();
+            textEmail.Text = dvgUsuario.Rows[rowIndex].Cells[3].Value.ToString();
+            textUsuario.Text = dvgUsuario.Rows[rowIndex].Cells[4].Value.ToString();
+            textSenha.Text = dvgUsuario.Rows[rowIndex].Cells[5].Value.ToString();
+            textContato.Text = dvgUsuario.Rows[rowIndex].Cells[6].Value.ToString();
+            textEndereco.Text = dvgUsuario.Rows[rowIndex].Cells[7].Value.ToString();
+            comboSexo.Text = dvgUsuario.Rows[rowIndex].Cells[8].Value.ToString();
+            comboTipoUsuario.Text = dvgUsuario.Rows[rowIndex].Cells[9].Value.ToString();
         }
     }
 }

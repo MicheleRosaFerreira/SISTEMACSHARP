@@ -109,7 +109,7 @@ namespace SistemadeVendasCsharp.DAL
             try
             {
                 string sql = "update tabela_usuarios nome=@nome, sobrenome=@sobrenome, email=@email, usuario=@usuario, senha=@senha, contato=@contato," +
-                    " endereco=@endereco, sexo=@sexo, usuario_tipo=@usuario_tipo, add_data=@add_data, add_porquem=@add_porquem,id=@id ";
+                    " endereco=@endereco, sexo=@sexo, usuario_tipo=@usuario_tipo, add_data=@add_data, add_porquem=@add_porquem where id=@id ";
                     
                 SqlCommand cmd = new SqlCommand(sql,con);
 
