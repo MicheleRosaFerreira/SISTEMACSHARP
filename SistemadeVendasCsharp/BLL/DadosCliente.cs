@@ -13,7 +13,7 @@ namespace SistemadeVendasCsharp.BLL
         public string sobrenome { get; set; }
         public string email { get; set; }
         public string usuario{ get; set; }
-        public string senha { get; set; }
+        public char PasswordChar { get; set; }
         public string contato { get; set; }
         public string endereco{ get; set; }
         public string sexo { get; set; }

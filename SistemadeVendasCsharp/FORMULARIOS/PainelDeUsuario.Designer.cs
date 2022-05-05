@@ -47,7 +47,7 @@
             this.textSobrenome = new System.Windows.Forms.TextBox();
             this.textEmail = new System.Windows.Forms.TextBox();
             this.textUsuario = new System.Windows.Forms.TextBox();
-            this.textSenha = new System.Windows.Forms.TextBox();
+            this.textPasswordChar = new System.Windows.Forms.TextBox();
             this.textContato = new System.Windows.Forms.TextBox();
             this.comboSexo = new System.Windows.Forms.ComboBox();
             this.comboTipoUsuario = new System.Windows.Forms.ComboBox();
@@ -233,12 +233,17 @@
             this.textUsuario.Size = new System.Drawing.Size(267, 20);
             this.textUsuario.TabIndex = 15;
             // 
-            // textSenha
+            // textPasswordChar
             // 
-            this.textSenha.Location = new System.Drawing.Point(72, 210);
-            this.textSenha.Name = "textSenha";
-            this.textSenha.Size = new System.Drawing.Size(267, 20);
-            this.textSenha.TabIndex = 16;
+            this.textPasswordChar.AcceptsReturn = true;
+            this.textPasswordChar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.textPasswordChar.Location = new System.Drawing.Point(72, 214);
+            this.textPasswordChar.Name = "textPasswordChar";
+            this.textPasswordChar.Size = new System.Drawing.Size(267, 20);
+            this.textPasswordChar.TabIndex = 16;
+            this.textPasswordChar.UseSystemPasswordChar = true;
+            this.textPasswordChar.TextChanged += new System.EventHandler(this.textPasswordChar_TextChanged);
+            this.textPasswordChar.Validated += new System.EventHandler(this.textPasswordChar_TextChanged);
             // 
             // textContato
             // 
@@ -362,7 +367,7 @@
             this.Controls.Add(this.comboTipoUsuario);
             this.Controls.Add(this.comboSexo);
             this.Controls.Add(this.textContato);
-            this.Controls.Add(this.textSenha);
+            this.Controls.Add(this.textPasswordChar);
             this.Controls.Add(this.textUsuario);
             this.Controls.Add(this.textEmail);
             this.Controls.Add(this.textSobrenome);
@@ -412,7 +417,7 @@
         private System.Windows.Forms.TextBox textSobrenome;
         private System.Windows.Forms.TextBox textEmail;
         private System.Windows.Forms.TextBox textUsuario;
-        private System.Windows.Forms.TextBox textSenha;
+        private System.Windows.Forms.TextBox textPasswordChar;
         private System.Windows.Forms.TextBox textContato;
         private System.Windows.Forms.ComboBox comboSexo;
         private System.Windows.Forms.ComboBox comboTipoUsuario;

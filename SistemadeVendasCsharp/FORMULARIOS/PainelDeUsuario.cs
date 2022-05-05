@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SistemadeVendasCsharp.DAL;
 using SistemadeVendasCsharp.BLL;
 
+
 namespace SistemadeVendasCsharp.FORMULARIOS
 {
     public partial class PainelDeUsuario : Form
@@ -53,7 +54,7 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             dadoscliente.sobrenome = textSobrenome.Text;
             dadoscliente.email = textEmail.Text;
             dadoscliente.usuario = textUsuario.Text;
-            dadoscliente.senha = textSenha.Text;
+            dadoscliente.PasswordChar = textPasswordChar.PasswordChar;
             dadoscliente.contato = textContato.Text;
             dadoscliente.endereco = textEndereco.Text;
             dadoscliente.sexo = comboSexo.Text;
@@ -75,8 +76,9 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             DataTable dt = cadastrar.Select();
             dvgUsuario.DataSource = dt;
 
+
             Limpar();
-         }
+        }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -85,23 +87,23 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void btatualizar_Click(object sender, EventArgs e)
         {
-            ConexaoBancoDados atualizar = new ConexaoBancoDados();  
+            ConexaoBancoDados atualizar = new ConexaoBancoDados();
             DadosCliente dadoscliente = new DadosCliente();
 
             dadoscliente.id = Convert.ToInt32(textID.Text);
 
-            dadoscliente.nome = textNome.Text  ;
+            dadoscliente.nome = textNome.Text;
             dadoscliente.sobrenome = textSobrenome.Text;
             dadoscliente.email = textEmail.Text;
             dadoscliente.usuario = textUsuario.Text;
-            dadoscliente.senha = textSenha.Text;
+            dadoscliente.PasswordChar = textPasswordChar.PasswordChar;
             dadoscliente.contato = textContato.Text;
             dadoscliente.endereco = textEndereco.Text;
             dadoscliente.sexo = comboSexo.Text;
             dadoscliente.usuario_tipo = comboTipoUsuario.Text;
             dadoscliente.add_data = DateTime.Now;
             dadoscliente.add_porquem = 1;
-        
+
 
             bool isSucesso = atualizar.Update(dadoscliente);
             if (isSucesso == true)
@@ -112,15 +114,17 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             else
             {
                 MessageBox.Show("erro ao atualizar cadastro.");
-             
+
             }
 
 
             DataTable dt = atualizar.Select();
             dvgUsuario.DataSource = dt;
 
-          
+
         }
+
+
 
         private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
         {
@@ -140,7 +144,27 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void btdeletar_Click(object sender, EventArgs e)
         {
-       
+
+            ConexaoBancoDados deletar = new ConexaoBancoDados();
+            DadosCliente dadoscliente = new DadosCliente();
+
+            dadoscliente.id = Convert.ToInt32(textID.Text);
+            bool isSucesso = deletar.Delete(dadoscliente);
+            if (isSucesso == true)
+            {
+                MessageBox.Show("cadastro apagado  com sucesso.");
+                Limpar();
+            }
+            else
+            {
+                MessageBox.Show("erro ao apagar cadastro.");
+
+            }
+
+
+            DataTable dt = deletar.Select();
+            dvgUsuario.DataSource = dt;
+
         }
         //Toda vez que o cadastro for realizado com sucesso as caixinhas de texto serao limpas para digitar outro usuario.
         private void Limpar()
@@ -150,7 +174,7 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             textSobrenome.Text = "";
             textEmail.Text = "";
             textUsuario.Text = "";
-            textSenha.Text = "";
+            textPasswordChar.Text = "";
             textContato.Text = "";
             textEndereco.Text = "";
             comboSexo.Text = "";
@@ -166,11 +190,23 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             textSobrenome.Text = dvgUsuario.Rows[rowIndex].Cells[2].Value.ToString();
             textEmail.Text = dvgUsuario.Rows[rowIndex].Cells[3].Value.ToString();
             textUsuario.Text = dvgUsuario.Rows[rowIndex].Cells[4].Value.ToString();
-            textSenha.Text = dvgUsuario.Rows[rowIndex].Cells[5].Value.ToString();
+            textPasswordChar.Text = dvgUsuario.Rows[rowIndex].Cells[5].Value.ToString();
             textContato.Text = dvgUsuario.Rows[rowIndex].Cells[6].Value.ToString();
             textEndereco.Text = dvgUsuario.Rows[rowIndex].Cells[7].Value.ToString();
             comboSexo.Text = dvgUsuario.Rows[rowIndex].Cells[8].Value.ToString();
             comboTipoUsuario.Text = dvgUsuario.Rows[rowIndex].Cells[9].Value.ToString();
         }
+
+        private void textPasswordChar_TextChanged(object sender, EventArgs e)
+        {
+            DadosCliente dadosSenha = new DadosCliente();
+            dadosSenha.PasswordChar = textPasswordChar.PasswordChar;
+            textPasswordChar.MaxLength = 8;
+            textPasswordChar.TextAlign = HorizontalAlignment.Left;
+            textPasswordChar.PasswordChar = '*';
+
+
+        }
     }
 }
+    

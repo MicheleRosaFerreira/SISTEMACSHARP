@@ -50,19 +50,21 @@ namespace SistemadeVendasCsharp.DAL
         public bool Insert(DadosCliente u)
         {
             bool isSucesso = false;
+       
+
             SqlConnection con = new SqlConnection(myconstring);
           
             try
             {
-                string sql = "insert into tabela_usuarios (nome, sobrenome, email, usuario, senha , contato, endereco, sexo, usuario_tipo, add_data, add_porquem) values" +
-                    " (@nome, @sobrenome,@email, @usuario, @senha , @contato, @endereco, @sexo, @usuario_tipo, @add_data, @add_porquem) ";
+                string sql = "insert into tabela_usuarios (nome, sobrenome, email, usuario, PasswordChar , contato, endereco, sexo, usuario_tipo, add_data, add_porquem) values" +
+                    " (@nome, @sobrenome,@email, @usuario, @PasswordChar , @contato, @endereco, @sexo, @usuario_tipo, @add_data, @add_porquem) ";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 
                 cmd.Parameters.AddWithValue("@nome", u.nome);
                 cmd.Parameters.AddWithValue("@sobrenome",u.sobrenome);
                 cmd.Parameters.AddWithValue("@email",u.email);
                 cmd.Parameters.AddWithValue("@usuario", u.usuario);
-                cmd.Parameters.AddWithValue("@senha", u.senha);
+                cmd.Parameters.AddWithValue("@PasswordChar", u.PasswordChar);
                 cmd.Parameters.AddWithValue("@contato", u.contato);
                 cmd.Parameters.AddWithValue("@endereco", u.endereco);
                 cmd.Parameters.AddWithValue("@sexo", u.sexo);
@@ -74,13 +76,14 @@ namespace SistemadeVendasCsharp.DAL
                 
                 int rows = cmd.ExecuteNonQuery();
                  
-                    if ( rows > 0 )
+                    if ( rows > 0)
                     {
                        isSucesso = true;
                  
                     }
                     else
                     {
+                   
                         isSucesso = false;
                     }
                 }
@@ -98,6 +101,9 @@ namespace SistemadeVendasCsharp.DAL
             }
             return isSucesso;
         } 
+
+        
+        
     
     #endregion
     #region atualizando dados no banco de dados.
@@ -108,7 +114,7 @@ namespace SistemadeVendasCsharp.DAL
 
             try
             {
-                string sql = "update tabela_usuarios nome=@nome, sobrenome=@sobrenome, email=@email, usuario=@usuario, senha=@senha, contato=@contato," +
+                string sql = "update tabela_usuarios set nome=@nome, sobrenome=@sobrenome, email=@email, usuario=@usuario, PasswordChar=@PasswordChar, contato=@contato," +
                     " endereco=@endereco, sexo=@sexo, usuario_tipo=@usuario_tipo, add_data=@add_data, add_porquem=@add_porquem where id=@id ";
                     
                 SqlCommand cmd = new SqlCommand(sql,con);
@@ -117,7 +123,7 @@ namespace SistemadeVendasCsharp.DAL
                 cmd.Parameters.AddWithValue("@sobrenome", u.sobrenome);
                 cmd.Parameters.AddWithValue("@email", u.email);
                 cmd.Parameters.AddWithValue("@usuario",u.usuario);
-                cmd.Parameters.AddWithValue("@senha",u.senha);
+                cmd.Parameters.AddWithValue("@PasswordChar", u.PasswordChar);
                 cmd.Parameters.AddWithValue("@contato",u.contato);
                 cmd.Parameters.AddWithValue("@endereco",u.endereco);
                 cmd.Parameters.AddWithValue("@sexo",u.sexo);
