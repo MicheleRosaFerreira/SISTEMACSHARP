@@ -62,8 +62,8 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             dadoscliente.add_data = DateTime.Now;
             dadoscliente.add_porquem = 1;
 
-            bool isSucesso = cadastrar.Insert(dadoscliente);
-            if (isSucesso == true)
+            bool isSucess = cadastrar.Insert(dadoscliente);
+            if (isSucess == true)
             {
                 MessageBox.Show("usuario cadastrado com sucesso.");
             }
@@ -105,8 +105,8 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             dadoscliente.add_porquem = 1;
 
 
-            bool isSucesso = atualizar.Update(dadoscliente);
-            if (isSucesso == true)
+            bool isSucess = atualizar.Update(dadoscliente);
+            if (isSucess == true)
             {
                 MessageBox.Show("cadastro atualizado  com sucesso.");
                 Limpar();
@@ -128,7 +128,17 @@ namespace SistemadeVendasCsharp.FORMULARIOS
 
         private void textPesquisarUsuario_TextChanged(object sender, EventArgs e)
         {
+        
+            string keywords = textPesquisarUsuario.Text;
 
+            if (keywords != null)
+            {
+
+                DataTable dt = dal.PesquisarUsuario(keywords);
+                dvgUsuario.DataSource = dt;
+            }
+            
+        
         }
 
         private void dvgUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -149,8 +159,8 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             DadosCliente dadoscliente = new DadosCliente();
 
             dadoscliente.id = Convert.ToInt32(textID.Text);
-            bool isSucesso = deletar.Delete(dadoscliente);
-            if (isSucesso == true)
+            bool isSucess = deletar.Delete(dadoscliente);
+            if (isSucess == true)
             {
                 MessageBox.Show("cadastro apagado  com sucesso.");
                 Limpar();
@@ -197,6 +207,7 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             comboTipoUsuario.Text = dvgUsuario.Rows[rowIndex].Cells[9].Value.ToString();
         }
 
+
         private void textPasswordChar_TextChanged(object sender, EventArgs e)
         {
             DadosCliente dadosSenha = new DadosCliente();
@@ -204,9 +215,7 @@ namespace SistemadeVendasCsharp.FORMULARIOS
             textPasswordChar.MaxLength = 8;
             textPasswordChar.TextAlign = HorizontalAlignment.Left;
             textPasswordChar.PasswordChar = '*';
-
-
         }
+      
     }
 }
-    

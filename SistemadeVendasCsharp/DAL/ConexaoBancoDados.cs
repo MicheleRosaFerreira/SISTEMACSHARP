@@ -16,7 +16,7 @@ namespace SistemadeVendasCsharp.DAL
         SqlConnection con = new SqlConnection();
 
         #region selecionar dados do banco de dados.
-        public string myconstring =( @"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = CsharpVenda; Integrated Security = True");
+        public string myconstring = (@"Data Source = (LocalDB)\MSSQLLocalDB; Initial Catalog = CsharpVenda; Integrated Security = True");
         public DataTable Select()
         {
             SqlConnection con = new SqlConnection(myconstring);
@@ -28,13 +28,13 @@ namespace SistemadeVendasCsharp.DAL
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 con.Open();
                 adapter.Fill(dt);
-                
+
             }
             catch (SqlException ex)
             {
 
                 MessageBox.Show(ex.Message);
-               
+
 
             }
             finally
@@ -49,20 +49,20 @@ namespace SistemadeVendasCsharp.DAL
         #region inserir dados no banco de dados.
         public bool Insert(DadosCliente u)
         {
-            bool isSucesso = false;
-       
+            bool isSucess = false;
+
 
             SqlConnection con = new SqlConnection(myconstring);
-          
+
             try
             {
                 string sql = "insert into tabela_usuarios (nome, sobrenome, email, usuario, PasswordChar , contato, endereco, sexo, usuario_tipo, add_data, add_porquem) values" +
                     " (@nome, @sobrenome,@email, @usuario, @PasswordChar , @contato, @endereco, @sexo, @usuario_tipo, @add_data, @add_porquem) ";
                 SqlCommand cmd = new SqlCommand(sql, con);
-                
+
                 cmd.Parameters.AddWithValue("@nome", u.nome);
-                cmd.Parameters.AddWithValue("@sobrenome",u.sobrenome);
-                cmd.Parameters.AddWithValue("@email",u.email);
+                cmd.Parameters.AddWithValue("@sobrenome", u.sobrenome);
+                cmd.Parameters.AddWithValue("@email", u.email);
                 cmd.Parameters.AddWithValue("@usuario", u.usuario);
                 cmd.Parameters.AddWithValue("@PasswordChar", u.PasswordChar);
                 cmd.Parameters.AddWithValue("@contato", u.contato);
@@ -71,22 +71,22 @@ namespace SistemadeVendasCsharp.DAL
                 cmd.Parameters.AddWithValue("@usuario_tipo", u.usuario_tipo);
                 cmd.Parameters.AddWithValue("@add_data", u.add_data);
                 cmd.Parameters.AddWithValue("@add_porquem", u.add_porquem);
-              
+
                 con.Open();
-                
+
                 int rows = cmd.ExecuteNonQuery();
-                 
-                    if ( rows > 0)
-                    {
-                       isSucesso = true;
-                 
-                    }
-                    else
-                    {
-                   
-                        isSucesso = false;
-                    }
+
+                if (rows > 0)
+                {
+                    isSucess = true;
+
                 }
+                else
+                {
+
+                    isSucess = false;
+                }
+            }
 
             catch (SqlException ex)
             {
@@ -99,67 +99,67 @@ namespace SistemadeVendasCsharp.DAL
                 con.Close();
 
             }
-            return isSucesso;
-        } 
+            return isSucess;
+        }
 
-        
-        
-    
-    #endregion
-    #region atualizando dados no banco de dados.
+
+
+
+        #endregion
+        #region atualizando dados no banco de dados.
         public bool Update(DadosCliente u)
         {
-            bool isSucesso = false;
+            bool isSucess = false;
             SqlConnection con = new SqlConnection(myconstring);
 
             try
             {
                 string sql = "update tabela_usuarios set nome=@nome, sobrenome=@sobrenome, email=@email, usuario=@usuario, PasswordChar=@PasswordChar, contato=@contato," +
                     " endereco=@endereco, sexo=@sexo, usuario_tipo=@usuario_tipo, add_data=@add_data, add_porquem=@add_porquem where id=@id ";
-                    
-                SqlCommand cmd = new SqlCommand(sql,con);
 
-                cmd.Parameters.AddWithValue("@nome",u.nome);
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                cmd.Parameters.AddWithValue("@nome", u.nome);
                 cmd.Parameters.AddWithValue("@sobrenome", u.sobrenome);
                 cmd.Parameters.AddWithValue("@email", u.email);
-                cmd.Parameters.AddWithValue("@usuario",u.usuario);
+                cmd.Parameters.AddWithValue("@usuario", u.usuario);
                 cmd.Parameters.AddWithValue("@PasswordChar", u.PasswordChar);
-                cmd.Parameters.AddWithValue("@contato",u.contato);
-                cmd.Parameters.AddWithValue("@endereco",u.endereco);
-                cmd.Parameters.AddWithValue("@sexo",u.sexo);
-                cmd.Parameters.AddWithValue("@usuario_tipo",u.usuario_tipo);
-                cmd.Parameters.AddWithValue("@add_data",u.add_data);
+                cmd.Parameters.AddWithValue("@contato", u.contato);
+                cmd.Parameters.AddWithValue("@endereco", u.endereco);
+                cmd.Parameters.AddWithValue("@sexo", u.sexo);
+                cmd.Parameters.AddWithValue("@usuario_tipo", u.usuario_tipo);
+                cmd.Parameters.AddWithValue("@add_data", u.add_data);
                 cmd.Parameters.AddWithValue("@add_porquem", u.add_porquem);
-                cmd.Parameters.AddWithValue("@id",u.id);
+                cmd.Parameters.AddWithValue("@id", u.id);
 
                 con.Open();
                 int rows = cmd.ExecuteNonQuery();
-                
-                if (rows > 0 )
+
+                if (rows > 0)
                 {
-                    isSucesso = true;
+                    isSucess = true;
                 }
                 else
                 {
-                    isSucesso=false;
+                    isSucess = false;
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);    
+                MessageBox.Show(ex.Message);
             }
             finally
             {
                 con.Close();
 
             }
-            return isSucesso;
+            return isSucess;
         }
         #endregion
         #region
         public bool Delete(DadosCliente u)
         {
-            bool isSucesso = false;
+            bool isSucess = false;
             SqlConnection con = new SqlConnection(myconstring);
 
             try
@@ -167,17 +167,17 @@ namespace SistemadeVendasCsharp.DAL
                 string sql = "Delete from tabela_usuarios where id=@id";
                 SqlCommand cmd = new SqlCommand(sql, con);
 
-                cmd.Parameters.AddWithValue("@id",u.id);
+                cmd.Parameters.AddWithValue("@id", u.id);
                 con.Open();
                 int rows = cmd.ExecuteNonQuery();
 
                 if (rows > 0)
                 {
-                    isSucesso = true;
+                    isSucess = true;
                 }
                 else
                 {
-                    isSucesso = false;
+                    isSucess = false;
                 }
             }
             catch (SqlException ex)
@@ -189,7 +189,33 @@ namespace SistemadeVendasCsharp.DAL
                 con.Close();
 
             }
-            return isSucesso;
+            return isSucess;
+        }
+
+        #endregion
+        #region
+        public DataTable PesquisarUsuario(string keywords )
+        {
+            SqlConnection con = new SqlConnection(myconstring);
+            DataTable dt = new DataTable();
+
+            try
+            {    
+                // a palavra like me indica por quais campos eu quero buscar o meu usuario.
+                string sql = "Select * from tabela_usuarios where id like  '%"  +keywords+ "%' or  nome like '%" + keywords + "%' or sobrenome like '%" + keywords + "%'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                con.Open();
+                adapter.Fill(dt);
+            }catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally 
+            { 
+                con.Close();
+            }
+            return dt;
         }
     }
     #endregion
